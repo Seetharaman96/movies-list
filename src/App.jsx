@@ -4,7 +4,25 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-      <MovieList />
+      {/* <MovieList /> */} <ColorChange />
+    </div>
+  );
+}
+function ColorChange() {
+  const [color, setColor] = useState("");
+
+  let styles = {
+    background: color,
+  };
+  return (
+    <div>
+      <input
+        style={styles}
+        type="text"
+        onChange={(e) => {
+          setColor(e.target.value);
+        }}
+      />
     </div>
   );
 }
@@ -106,7 +124,11 @@ function MovieList() {
   );
 }
 function Movie({ movie }) {
-  let colorChange = {
+  const [show, setShow] = useState(true);
+  // let summaryStyles = {
+  //   display: show ? "block" : "none",
+  // };
+  let ratingColor = {
     color: movie.rating > 8.5 ? "green" : "red",
   };
   return (
@@ -115,12 +137,23 @@ function Movie({ movie }) {
 
       <div className="name-rating">
         <h2 className="movie-name">{movie.name}</h2>
-        <p style={colorChange} className="movie-rating">
+        <p style={ratingColor} className="movie-rating">
           ⭐ {movie.rating}
         </p>
       </div>
-
-      <p className="movie-summary">{movie.summary}</p>
+      <button
+        onClick={() => {
+          setShow(!show);
+        }}
+      >
+        Toggle summary
+      </button>
+      {/* conditional styling */}
+      {/* <p style={summaryStyles} className="movie-summary">
+        {movie.summary}
+      </p> */}
+      {/* conditional rendering */}
+      {show ? <p className="movie-summary">{movie.summary}</p> : null}
       <Counter />
     </div>
   );
