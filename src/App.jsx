@@ -4,25 +4,7 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-      {/* <MovieList /> */} <ColorChange />
-    </div>
-  );
-}
-function ColorChange() {
-  const [color, setColor] = useState("");
-
-  let styles = {
-    background: color,
-  };
-  return (
-    <div>
-      <input
-        style={styles}
-        type="text"
-        onChange={(e) => {
-          setColor(e.target.value);
-        }}
-      />
+      <MovieList />
     </div>
   );
 }
