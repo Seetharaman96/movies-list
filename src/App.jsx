@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Button from "@mui/material/Button";
 
 export default function App() {
   return (
@@ -9,7 +10,7 @@ export default function App() {
   );
 }
 function MovieList() {
-  let Movies = [
+  let [movies, setMovies] = useState([
     {
       name: "Vikram",
       poster:
@@ -96,12 +97,54 @@ function MovieList() {
         "When Earth becomes uninhabitable in the future, a farmer and ex-NASA\\n pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team\\n of researchers, to find a new planet for humans.",
       rating: 8.8,
     },
-  ];
+  ]);
+  let [name, setName] = useState("");
+  let [poster, setPoster] = useState("");
+  let [rating, setRating] = useState("");
+  let [summary, setSummary] = useState("");
   return (
-    <div className="movie-list">
-      {Movies.map((mov) => (
-        <Movie movie={mov} />
-      ))}
+    <div>
+      <div className="input-box">
+        <input
+          type="text"
+          placeholder="name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="poster"
+          onChange={(e) => setPoster(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="rating"
+          onChange={(e) => setRating(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="summary"
+          onChange={(e) => setSummary(e.target.value)}
+        />
+        <Button
+          onClick={() => {
+            let newMovie = {
+              name: name,
+              poster: poster,
+              rating: rating,
+              summary: summary,
+            };
+            setMovies([...movies, newMovie]);
+          }}
+          variant="outlined"
+        >
+          Add Movie
+        </Button>
+      </div>
+      <div className="movie-list">
+        {movies.map((mov) => (
+          <Movie movie={mov} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -123,13 +166,14 @@ function Movie({ movie }) {
           ⭐ {movie.rating}
         </p>
       </div>
-      <button
+      <Button
         onClick={() => {
           setShow(!show);
         }}
+        variant="contained"
       >
         Toggle summary
-      </button>
+      </Button>
       {/* conditional styling */}
       {/* <p style={summaryStyles} className="movie-summary">
         {movie.summary}
@@ -145,20 +189,23 @@ function Counter() {
   const [dislike, setDislike] = useState(0);
   return (
     <div>
-      <button
+      <Button
         onClick={() => {
           setLike(like + 1);
         }}
+        variant="outlined"
       >
         👍 {like}
-      </button>
-      <button
+      </Button>
+
+      <Button
         onClick={() => {
           setDislike(dislike + 1);
         }}
+        variant="outlined"
       >
         👎 {dislike}
-      </button>
+      </Button>
     </div>
   );
 }

@@ -24,7 +24,7 @@
     justify-items: center;
 }
 .movie-summary{
-    font-size:17px;
+    font-size:20px;
     margin-top: 0;
 }
 .movie-name{
@@ -37,4 +37,11 @@
 }
 .movie-poster{
     margin-top: 20px;
+}
+.input-box{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+    margin: auto;
 }
